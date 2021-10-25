@@ -1,0 +1,45 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Авторизация{% endblock title %}
+
+{% block content %}
+{% load static %}
+
+    <form id="form-1" action="/account/entry" method="post" onsubmit="return true">
+        <!-- если другая форма захочет себя выдать за нашу форму, у нее не получится
+        потому что токен - набор трудноподделываымых символов - уникальный -->
+        {% csrf_token %}
+        <p>
+            <label for="login">Логин:</label><br>
+            <input type="text" id="login" name="login" class="inp" required><br>
+            <span id="login-err" class="err"></span>
+        </p>
+        <p>
+            <label for="pass1">Пароль:</label><br>
+            <input type="password" id="pass1" name="pass1" class="inp" required><br>
+            <span id="pass1-err" class="err"></span>
+        </p>
+        <p style="margin-top: 30px;">
+            <input type="submit" value="Войти" id="submit" class="btn btn-success my-btn">
+            <input type="reset" value="Отмена" id="reset" class="btn btn-danger my-btn">
+        </p>
+    </form>
+    <style>
+        .inp {
+            width: 40%;
+            padding: 5px;
+        }
+        label {
+            font: italic 12pt 'Trebuchet MS';
+        }
+        .err {
+            font-style: italic;
+            color: red;
+            margin-top: 3px;
+        }
+        .my-btn {
+            width: 150px;
+            margin-right: 5px;
+        }
+    </style>
+{% endblock content %}
