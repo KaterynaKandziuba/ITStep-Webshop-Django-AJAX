@@ -15,13 +15,9 @@ def ajax_cart(request):
         status='pending',
         amount=1
     )
-
-    print('Hello2')
     user_orders = Order_C.objects.filter(user_id=uid)
     cost = 0
-    print(cost)
     for order in user_orders:
-        print(order.product.price)
         cost += order.product.price
 
     response['cost'] = cost
