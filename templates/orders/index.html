@@ -4,32 +4,38 @@
 
 {% block content %}
 {% load static %}
+<script src="{% static 'js/orders.js' %}"></script>
+
 <div id="cart-box">
     <table width="100%">
         <thead>
             <tr>
+                <th>Выбрать</th>
                 <th>Фото</th>
                 <th>Наименование</th>
                 <th>Продукт</th>
                 <th>Цена</th>
-                <th>Выбрать</th>
-                <th>Управление</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             {% for order in orders %}
             <tr>
-                <td>1</td>
+                <td>
+                    <input id="product-checkbox" type="checkbox"></input>
+                </td>
+                <td>
+                    <div class="product-img">
+                        <img src="/media/{{ order.product.picture }}" style="height: 170px">
+                    </div>
+                </td>
                 <td>{{ order.title }}</td>
                 <td>{{ order.product.title }}</td>
                 <td>{{ order.product.price }}</td>
                 <td>
-                    <input type="checkbox"></input>
-                </td>
-                <td>
                     <div class="btn-group">
-                        <button class="btn btn-sm btn-success">Детали</button>
-                        <button class="btn btn-sm btn-danger">Удалить</button>
+                        <button class="btn btn-sm btn-success" disabled>Детали</button>
+                        <button id="delete-product" class="btn btn-sm btn-danger" disabled>Удалить</button>
                     </div>
                 </td>
             </tr>
@@ -52,8 +58,22 @@
         padding: 5px;
     }
 
+    #cart-box th {
+        background-color: rgb(241, 241, 241);
+        padding: 20px;
+    }
+
     #cart-box tr {
         border-bottom: 1px solid silver;
+    }
+
+    .btn {
+        border: 5px solid white;
+        border-radius: 50px;
+    }
+
+    .btn-success{
+        color: greenyellow;
     }
 </style>
 {% endblock content %}
